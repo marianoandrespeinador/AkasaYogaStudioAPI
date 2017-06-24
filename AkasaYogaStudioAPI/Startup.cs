@@ -32,20 +32,21 @@ namespace AkasaYogaStudioAPI
         {
             // Add framework services.
             var pathToDoc = Configuration["Swagger:FileName"];
+            var version = Configuration["Swagger:Version"];
+
+            var swaggerInfo = new Info
+            {
+                Title = Configuration["Swagger:Title"],
+                Version = version,
+                Description = Configuration["Swagger:Description"],
+                TermsOfService = Configuration["Swagger:TermsOfService"]
+            };
 
             services.AddMvc();
 
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1",
-                    new Info
-                    {
-                        Title = "Akasa Yoga Studio API",
-                        Version = "v1",
-                        Description = "A simple API for Akasa Studio",
-                        TermsOfService = "None"
-                    }
-                );
+                options.SwaggerDoc(version, swaggerInfo);
 
                 var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, pathToDoc);
                 options.IncludeXmlComments(filePath);
