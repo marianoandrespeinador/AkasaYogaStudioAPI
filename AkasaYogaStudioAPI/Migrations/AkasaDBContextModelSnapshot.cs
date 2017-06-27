@@ -176,12 +176,18 @@ namespace AkasaYogaStudioAPI.Migrations
                     b.Property<string>("Description")
                         .HasMaxLength(500);
 
+                    b.Property<string>("Email");
+
                     b.Property<DateTime?>("EndDate");
 
                     b.Property<string>("FacebookID");
 
                     b.Property<string>("Name")
                         .HasMaxLength(100);
+
+                    b.Property<string>("Password");
+
+                    b.Property<string>("PasswordSalt");
 
                     b.Property<DateTime>("StartDate");
 

@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Akasa.Data;
+using AkasaYogaStudioAPI.MigrationsInitContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -58,7 +59,7 @@ namespace AkasaYogaStudioAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, AkasaDBContext context)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -76,6 +77,8 @@ namespace AkasaYogaStudioAPI
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "V1 Docs");
             });
+
+            DbInitializer.Initialize(context);
         }
     }
 }
