@@ -1,11 +1,20 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Akasa.Data;
+using Akasa.Model;
+using Akasa.Services;
+using AkasaYogaStudioAPI.Core;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AkasaYogaStudioAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class LessonController : AkasaController
     {
+        public LessonController(AkasaDBContext context) : base(context)
+        {
+        }
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
@@ -15,9 +24,9 @@ namespace AkasaYogaStudioAPI.Controllers
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<Lesson> Get(int id)
         {
-            return "value";
+            return await new LessonService(_context).Get(id);
         }
 
         // POST api/values
