@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Akasa.Data;
 using Akasa.Model;
 using Akasa.Services.Core;
+using Microsoft.EntityFrameworkCore;
 
 namespace Akasa.Services
 {
@@ -15,5 +16,14 @@ namespace Akasa.Services
             : base(context)
         {
         }
+
+        public override async Task<Lesson> Get(int id)
+        {
+            return await ThisDbSet
+                .Where(e => e.Id == id)
+                .Include(e => e.LstLessonCost)
+                .FirstAsync();
+        }
+
     }
 }
