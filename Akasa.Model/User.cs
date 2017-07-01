@@ -11,8 +11,8 @@ namespace Akasa.Model
         public string Password { get; set; }
         public string PasswordSalt { get; set; }
 
-        public List<LessonItsOnXUser> LstLessonItsOnXUser { get; set; } = new List<LessonItsOnXUser>();
-        public List<UserInjury> LstUserInjury { get; set; } = new List<UserInjury>();
-        public List<UserRole> LstUserRole { get; set; } = new List<UserRole>();
+        public virtual List<LessonItsOnXUser> LstLessonItsOnXUser { get; set; } = new List<LessonItsOnXUser>();
+        public virtual List<UserInjury> LstUserInjury { get; set; } = new List<UserInjury>();
+        public virtual List<UserRole> LstUserRole { get; set; } = new List<UserRole>();
     }
 }

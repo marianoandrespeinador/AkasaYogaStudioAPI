@@ -13,6 +13,6 @@ namespace Akasa.Model
         public DateTime DateFixed { get; set; }
 
         public virtual Lesson Lesson { get; set; }
-        public ICollection<LessonItsOn> LstLessonItsOn { get; set; } = new List<LessonItsOn>();
+        public virtual List<LessonItsOn> LstLessonItsOn { get; set; } = new List<LessonItsOn>();
     }
 }

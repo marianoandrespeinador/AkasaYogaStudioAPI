@@ -20,7 +20,7 @@ namespace Akasa.Model
         public bool Sunday { get; set; }
 
         public virtual Lesson Lesson { get; set; }
-        public List<LessonItsOn> LstLessonItsOn { get; set; } = new List<LessonItsOn>();
-        public List<LessonRecurrentException> LstLessonRecurrentException { get; set; } = new List<LessonRecurrentException>();
+        public virtual List<LessonItsOn> LstLessonItsOn { get; set; } = new List<LessonItsOn>();
+        public virtual List<LessonRecurrentException> LstLessonRecurrentException { get; set; } = new List<LessonRecurrentException>();
     }
 }

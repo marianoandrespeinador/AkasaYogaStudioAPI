@@ -19,6 +19,6 @@ namespace Akasa.Model
 
         public virtual LessonRecurrent LessonRecurrent { get; set; }
         public virtual LessonDay LessonDay { get; set; }
-        public List<LessonItsOnXUser> LstLessonItsOnXUser { get; set; } = new List<LessonItsOnXUser>();
+        public virtual List<LessonItsOnXUser> LstLessonItsOnXUser { get; set; } = new List<LessonItsOnXUser>();
     }
 }
