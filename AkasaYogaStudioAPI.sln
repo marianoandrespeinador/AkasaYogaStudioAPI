@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Akasa.Model", "Akasa.Model\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Akasa.Services", "Akasa.Services\Akasa.Services.csproj", "{5F1FF48D-642C-4948-8009-8E5C6EFBBB1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akasa.Dtos", "Akasa.Dtos\Akasa.Dtos.csproj", "{9AE12917-A0D4-4597-BF03-C54ABB2EF782}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Akasa.Dto", "Akasa.Dto\Akasa.Dto.csproj", "{3C7460D0-F821-4F43-B852-293FF06A4E67}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{5F1FF48D-642C-4948-8009-8E5C6EFBBB1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F1FF48D-642C-4948-8009-8E5C6EFBBB1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F1FF48D-642C-4948-8009-8E5C6EFBBB1A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9AE12917-A0D4-4597-BF03-C54ABB2EF782}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9AE12917-A0D4-4597-BF03-C54ABB2EF782}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9AE12917-A0D4-4597-BF03-C54ABB2EF782}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9AE12917-A0D4-4597-BF03-C54ABB2EF782}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C7460D0-F821-4F43-B852-293FF06A4E67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C7460D0-F821-4F43-B852-293FF06A4E67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C7460D0-F821-4F43-B852-293FF06A4E67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C7460D0-F821-4F43-B852-293FF06A4E67}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
