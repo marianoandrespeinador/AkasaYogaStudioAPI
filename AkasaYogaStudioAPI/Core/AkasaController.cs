@@ -4,17 +4,63 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Akasa.Data;
+using Akasa.Dto;
+using Akasa.Dto.Core;
+using Akasa.Model;
+using Akasa.Services;
+using Akasa.Services.Core;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AkasaYogaStudioAPI.Core
 {
-    public class AkasaController : Controller
+    public class AkasaController<IService, TGetDto, TInsertDto, TUpdateDto> : Controller
+        where IService : IAkasaService<TGetDto, TInsertDto, TUpdateDto>
+        where TGetDto : FiniteDataEntityDto
+        where TInsertDto : FiniteDataEntityDto
+        where TUpdateDto : FiniteDataEntityDto
     {
-        protected AkasaDBContext _context;
+        protected IService _service;
 
-        public AkasaController(AkasaDBContext context)
+        public AkasaController(IService service)
         {
-            _context = context;
+            _service = service;
         }
+        
+        // GET api/values
+        [HttpGet]
+        public async Task<IEnumerable<TGetDto>> Get()
+        {
+            return await _service.Get();
+        }
+
+        // GET api/values/5
+        [HttpGet("{id}")]
+        public async Task<TGetDto> Get(int id)
+        {
+            return await _service.Get(id);
+        }
+
+        // POST api/values
+        [HttpPost]
+        public async Task<TGetDto> Post([FromBody]TInsertDto insertData)
+        {
+            return await _service.Insert(insertData);
+        }
+
+        // PUT api/values/5
+        [HttpPut("{id}")]
+        public async Task Put(int id, [FromBody]TUpdateDto updateData)
+        {
+            await _service.Update(id, updateData);
+        }
+
+        // DELETE api/values/5
+        [HttpDelete("{id}")]
+        public async Task Delete(int id)
+        {
+            await _service.Delete(id);
+        }
+
     }
 }

@@ -1,49 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Akasa.Data;
+using Akasa.Dto;
 using Akasa.Model;
 using Akasa.Services;
+using Akasa.Services.Contracts;
+using Akasa.Services.Core;
+using Akasa.Services.Implementations;
 using AkasaYogaStudioAPI.Core;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AkasaYogaStudioAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class LessonController : AkasaController
+    public class LessonController : AkasaController<ILessonService, LessonGetDto, LessonInsertDto, LessonUpdateDto>
     {
-        public LessonController(AkasaDBContext context) : base(context)
-        {
-        }
-
-        // GET api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public async Task<Lesson> Get(int id)
-        {
-            return await new LessonService(_context).Get(id);
-        }
-
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        public LessonController(ILessonService lessonService) 
+            : base(lessonService)
         {
         }
     }
