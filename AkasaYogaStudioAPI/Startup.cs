@@ -52,7 +52,7 @@ namespace AkasaYogaStudioAPI
             services.AddMvc();
             services.AddMemoryCache();
 
-            services.AddAutoMapper(typeof(AkasaMapper));           
+            services.AddAkasaMappingService();
 
             services.AddAkasaServices();
 

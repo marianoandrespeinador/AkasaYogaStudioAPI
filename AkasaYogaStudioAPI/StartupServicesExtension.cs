@@ -7,6 +7,7 @@ using Akasa.Services.Contracts;
 using Akasa.Services.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Akasa.Services.Core;
+using AutoMapper;
 
 namespace AkasaYogaStudioAPI
 {
@@ -52,5 +53,21 @@ namespace AkasaYogaStudioAPI
                 addScopedMethod.Invoke(null, new object[] { thisServiceCollection });
             }
         }
+
+        /// <summary>
+        ///     Add auto-mapping DI.
+        /// </summary>
+        /// <param name="thisServiceCollection"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddAkasaMappingService(this IServiceCollection thisServiceCollection)
+        {
+            thisServiceCollection.AddAutoMapper();
+            var mapperConfiguration = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new AkasaMapper());
+            });
+            return thisServiceCollection.AddSingleton(sp => mapperConfiguration.CreateMapper());
+        }
+
     }
 }

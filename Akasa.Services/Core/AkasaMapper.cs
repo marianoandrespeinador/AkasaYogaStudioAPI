@@ -7,11 +7,13 @@ using AutoMapper;
 
 namespace Akasa.Services.Core
 {
-    public abstract class AkasaMapper : Profile
+    public class AkasaMapper : Profile
     {
         public AkasaMapper()
         {
-            CreateMap<User, UserGetDto>().ReverseMap();
+            CreateMap<Lesson, LessonUpdateDto>().ReverseMap();
+            CreateMap<Lesson, LessonInsertDto>().ReverseMap();
+            CreateMap<Lesson, LessonGetDto>().ReverseMap();
         }
     }
 }
