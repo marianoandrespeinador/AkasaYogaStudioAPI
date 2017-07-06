@@ -1,15 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Akasa.Data;
-using Akasa.Dto;
 using Akasa.Dto.Core;
-using Akasa.Model;
-using Akasa.Services;
 using Akasa.Services.Core;
-using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AkasaYogaStudioAPI.Core

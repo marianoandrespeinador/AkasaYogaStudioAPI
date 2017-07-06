@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Akasa.Data.Core;
+﻿using Akasa.Data.Core;
 using Akasa.Model;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

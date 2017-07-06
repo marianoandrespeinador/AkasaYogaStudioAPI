@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Akasa.Dto.Core;
-using Akasa.Model.Core;
-using Akasa.Services.Contracts;
 
 namespace Akasa.Services.Core
 {

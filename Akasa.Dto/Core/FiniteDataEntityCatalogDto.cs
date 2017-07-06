@@ -1,5 +1,3 @@
-using System;
-
 namespace Akasa.Dto.Core
 {
       public abstract class FiniteDataEntityCatalogDto : FiniteDataEntityDto

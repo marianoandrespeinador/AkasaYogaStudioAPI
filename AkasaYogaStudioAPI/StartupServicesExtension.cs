@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
-using Akasa.Services.Contracts;
 using Akasa.Services.Core;
 using Microsoft.Extensions.DependencyInjection;
-using Akasa.Services.Core;
 using AutoMapper;
 
 namespace AkasaYogaStudioAPI

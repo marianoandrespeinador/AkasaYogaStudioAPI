@@ -1,4 +1,3 @@
-using System;
 using Akasa.Dto.Core;
 
 namespace Akasa.Dto

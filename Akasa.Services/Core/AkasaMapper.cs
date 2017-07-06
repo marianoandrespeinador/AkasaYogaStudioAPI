@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Reflection;
-using System.Text;
-using Akasa.Dto;
-using Akasa.Dto.Core;
-using Akasa.Model;
-using Akasa.Model.Core;
 using AutoMapper;
-using Microsoft.Extensions.Caching.Memory;
 
 namespace Akasa.Services.Core
 {

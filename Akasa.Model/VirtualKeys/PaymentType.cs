@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Akasa.Model.VirtualKeys
+﻿namespace Akasa.Model.VirtualKeys
 {
     public enum PaymentType
     {

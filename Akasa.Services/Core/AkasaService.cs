@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using Akasa.Data;
 using Akasa.Dto.Core;
 using Akasa.Model.Core;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Memory;
 
 namespace Akasa.Services.Core
 {

@@ -1,11 +1,8 @@
 ﻿using System.IO;
 using Akasa.Data;
-using Akasa.Services.Core;
 using AkasaYogaStudioAPI.MigrationsInitContext;
-using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Server.Kestrel.Internal.Networking;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
