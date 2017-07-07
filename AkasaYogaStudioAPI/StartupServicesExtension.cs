@@ -3,6 +3,12 @@ using System.Reflection;
 using Akasa.Services.Core;
 using Microsoft.Extensions.DependencyInjection;
 using AutoMapper;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
+using NLog.Web;
 
 namespace AkasaYogaStudioAPI
 {
@@ -62,6 +68,29 @@ namespace AkasaYogaStudioAPI
                 cfg.AddProfile(new AkasaMapper());
             });
             return thisServiceCollection.AddSingleton(sp => mapperConfiguration.CreateMapper());
+        }
+
+        /// <summary>
+        ///     Add logging service (NLog)
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
+        /// <param name="loggerFactory"></param>
+        /// <param>
+        ///     <name>thisServiceCollection</name>
+        /// </param>
+        /// <param name="loggingCongConfigurationSection"></param>
+        /// <returns></returns>
+        public static void ConfigureAkasaLogging(this IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, IConfigurationSection loggingCongConfigurationSection)
+        {
+            loggerFactory.AddConsole(loggingCongConfigurationSection);
+            loggerFactory.AddDebug();
+
+            loggerFactory.AddNLog();
+
+            app.AddNLogWeb();
+
+            env.ConfigureNLog("NLog.config");
         }
 
     }
