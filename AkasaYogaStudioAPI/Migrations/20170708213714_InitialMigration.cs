@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AkasaYogaStudioAPI.Migrations
@@ -24,6 +25,23 @@ namespace AkasaYogaStudioAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PaymentModality",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGeneratedOnAdd", true),
+                    Cost = table.Column<decimal>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: true),
+                    LessonAvailabilityPeriod = table.Column<TimeSpan>(nullable: false),
+                    LessonQuantityAvailable = table.Column<int>(nullable: false),
+                    StartDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PaymentModality", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "User",
                 columns: table => new
                 {
@@ -41,29 +59,6 @@ namespace AkasaYogaStudioAPI.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_User", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "LessonCost",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGeneratedOnAdd", true),
-                    EndDate = table.Column<DateTime>(nullable: true),
-                    LessonId = table.Column<int>(nullable: false),
-                    Price = table.Column<decimal>(nullable: false),
-                    StartDate = table.Column<DateTime>(nullable: false),
-                    VKPaymentType = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_LessonCost", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_LessonCost_Lesson_LessonId",
-                        column: x => x.LessonId,
-                        principalTable: "Lesson",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -139,21 +134,47 @@ namespace AkasaYogaStudioAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserRole",
+                name: "UserPayment",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGeneratedOnAdd", true),
                     EndDate = table.Column<DateTime>(nullable: true),
+                    PaymentModalityId = table.Column<int>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
+                    TotalAmountPayed = table.Column<decimal>(nullable: false),
+                    TotalAmountToPay = table.Column<decimal>(nullable: false),
+                    UserId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserPayment", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserPayment_PaymentModality_PaymentModalityId",
+                        column: x => x.PaymentModalityId,
+                        principalTable: "PaymentModality",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserPayment_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserXRole",
+                columns: table => new
+                {
                     UserId = table.Column<int>(nullable: false),
                     VKRole = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserRole", x => x.Id);
+                    table.PrimaryKey("PK_UserXRole", x => new { x.UserId, x.VKRole });
                     table.ForeignKey(
-                        name: "FK_UserRole_User_UserId",
+                        name: "FK_UserXRole_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
@@ -213,6 +234,28 @@ namespace AkasaYogaStudioAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserPaymentDetail",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGeneratedOnAdd", true),
+                    AmountPayed = table.Column<decimal>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: true),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    UserPaymentId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserPaymentDetail", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserPaymentDetail_UserPayment_UserPaymentId",
+                        column: x => x.UserPaymentId,
+                        principalTable: "UserPayment",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "LessonItsOnXUser",
                 columns: table => new
                 {
@@ -235,11 +278,6 @@ namespace AkasaYogaStudioAPI.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_LessonCost_LessonId",
-                table: "LessonCost",
-                column: "LessonId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LessonDay_LessonId",
@@ -277,16 +315,23 @@ namespace AkasaYogaStudioAPI.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserRole_UserId",
-                table: "UserRole",
+                name: "IX_UserPayment_PaymentModalityId",
+                table: "UserPayment",
+                column: "PaymentModalityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserPayment_UserId",
+                table: "UserPayment",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserPaymentDetail_UserPaymentId",
+                table: "UserPaymentDetail",
+                column: "UserPaymentId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "LessonCost");
-
             migrationBuilder.DropTable(
                 name: "LessonItsOnXUser");
 
@@ -297,19 +342,28 @@ namespace AkasaYogaStudioAPI.Migrations
                 name: "UserInjury");
 
             migrationBuilder.DropTable(
-                name: "UserRole");
+                name: "UserPaymentDetail");
+
+            migrationBuilder.DropTable(
+                name: "UserXRole");
 
             migrationBuilder.DropTable(
                 name: "LessonItsOn");
 
             migrationBuilder.DropTable(
-                name: "User");
+                name: "UserPayment");
 
             migrationBuilder.DropTable(
                 name: "LessonDay");
 
             migrationBuilder.DropTable(
                 name: "LessonRecurrent");
+
+            migrationBuilder.DropTable(
+                name: "PaymentModality");
+
+            migrationBuilder.DropTable(
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "Lesson");

@@ -3,7 +3,7 @@ using Akasa.Model.Core;
 
 namespace Akasa.Model
 {
-    public class UserRole : FiniteDataEntity
+    public class UserXRole
     {
         [ForeignKey(nameof(User))]
         public int UserId { get; set; }

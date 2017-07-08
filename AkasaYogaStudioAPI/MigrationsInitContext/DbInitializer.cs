@@ -21,7 +21,7 @@ namespace AkasaYogaStudioAPI.MigrationsInitContext
                     Name = "Nano",
                     FacebookID = String.Empty,
                     Email = "nanopp@gmail.com",
-                    LstUserRole = new List<UserRole>() { new UserRole
+                    LstUserXRole = new List<UserXRole>() { new UserXRole
                     {
                         VKRole = 2
                     } }
@@ -36,11 +36,6 @@ namespace AkasaYogaStudioAPI.MigrationsInitContext
                 {
                     Name = "Yoga Martes",
                     Description = "Aca la descripcion de la clase",
-                    LstLessonCost = new List<LessonCost>
-                    {
-                        new LessonCost {Price = 5000, VKPaymentType = (int) PaymentType.Once},
-                        new LessonCost {Price = 16000, VKPaymentType = (int) PaymentType.Monthly}
-                    },
                     LstLessonRecurrent = new List<LessonRecurrent>
                     {
                         new LessonRecurrent
@@ -53,6 +48,34 @@ namespace AkasaYogaStudioAPI.MigrationsInitContext
                 context.SaveChanges();
             }
 
+            if (!context.PaymentModality.Any())
+            {
+                context.PaymentModality.AddRange(
+                    new PaymentModality
+                    {
+                        Cost = 6000,
+                        LessonQuantityAvailable = 1,
+                        LessonAvailabilityPeriod = new TimeSpan(1, 0, 0, 0)
+                    },
+                    new PaymentModality
+                    {
+                        Cost = 16000,
+                        LessonQuantityAvailable = 4,
+                        LessonAvailabilityPeriod = new TimeSpan(30, 0, 0, 0)
+                    },
+                    new PaymentModality
+                    {
+                        Cost = 28000,
+                        LessonQuantityAvailable = 8,
+                        LessonAvailabilityPeriod = new TimeSpan(60, 0, 0, 0)
+                    },
+                    new PaymentModality
+                    {
+                        Cost = 48000,
+                        LessonQuantityAvailable = 16,
+                        LessonAvailabilityPeriod = new TimeSpan(90, 0, 0, 0)
+                    });
+            }
         }
 
     }

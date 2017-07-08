@@ -12,6 +12,6 @@ namespace Akasa.Model
 
         public virtual List<LessonItsOnXUser> LstLessonItsOnXUser { get; set; } = new List<LessonItsOnXUser>();
         public virtual List<UserInjury> LstUserInjury { get; set; } = new List<UserInjury>();
-        public virtual List<UserRole> LstUserRole { get; set; } = new List<UserRole>();
+        public virtual List<UserXRole> LstUserXRole { get; set; } = new List<UserXRole>();
     }
 }

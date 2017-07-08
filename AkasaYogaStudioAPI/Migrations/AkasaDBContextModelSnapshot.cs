@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Akasa.Data;
 
 namespace AkasaYogaStudioAPI.Migrations
@@ -12,7 +13,7 @@ namespace AkasaYogaStudioAPI.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.1.1");
+                .HasAnnotation("ProductVersion", "1.1.2");
 
             modelBuilder.Entity("Akasa.Model.Lesson", b =>
                 {
@@ -32,28 +33,6 @@ namespace AkasaYogaStudioAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Lesson");
-                });
-
-            modelBuilder.Entity("Akasa.Model.LessonCost", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime?>("EndDate");
-
-                    b.Property<int>("LessonId");
-
-                    b.Property<decimal>("Price");
-
-                    b.Property<DateTime>("StartDate");
-
-                    b.Property<int>("VKPaymentType");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LessonId");
-
-                    b.ToTable("LessonCost");
                 });
 
             modelBuilder.Entity("Akasa.Model.LessonDay", b =>
@@ -167,6 +146,26 @@ namespace AkasaYogaStudioAPI.Migrations
                     b.ToTable("LessonRecurrentException");
                 });
 
+            modelBuilder.Entity("Akasa.Model.PaymentModality", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<decimal>("Cost");
+
+                    b.Property<DateTime?>("EndDate");
+
+                    b.Property<TimeSpan>("LessonAvailabilityPeriod");
+
+                    b.Property<int>("LessonQuantityAvailable");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PaymentModality");
+                });
+
             modelBuilder.Entity("Akasa.Model.User", b =>
                 {
                     b.Property<int>("Id")
@@ -215,32 +214,61 @@ namespace AkasaYogaStudioAPI.Migrations
                     b.ToTable("UserInjury");
                 });
 
-            modelBuilder.Entity("Akasa.Model.UserRole", b =>
+            modelBuilder.Entity("Akasa.Model.UserPayment", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime?>("EndDate");
 
+                    b.Property<int>("PaymentModalityId");
+
                     b.Property<DateTime>("StartDate");
 
+                    b.Property<decimal>("TotalAmountPayed");
+
+                    b.Property<decimal>("TotalAmountToPay");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PaymentModalityId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserPayment");
+                });
+
+            modelBuilder.Entity("Akasa.Model.UserPaymentDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<decimal>("AmountPayed");
+
+                    b.Property<DateTime?>("EndDate");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.Property<int>("UserPaymentId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserPaymentId");
+
+                    b.ToTable("UserPaymentDetail");
+                });
+
+            modelBuilder.Entity("Akasa.Model.UserXRole", b =>
+                {
                     b.Property<int>("UserId");
 
                     b.Property<int>("VKRole");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserId", "VKRole");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("UserRole");
-                });
-
-            modelBuilder.Entity("Akasa.Model.LessonCost", b =>
-                {
-                    b.HasOne("Akasa.Model.Lesson", "Lesson")
-                        .WithMany("LstLessonCost")
-                        .HasForeignKey("LessonId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.ToTable("UserXRole");
                 });
 
             modelBuilder.Entity("Akasa.Model.LessonDay", b =>
@@ -299,10 +327,31 @@ namespace AkasaYogaStudioAPI.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Akasa.Model.UserRole", b =>
+            modelBuilder.Entity("Akasa.Model.UserPayment", b =>
+                {
+                    b.HasOne("Akasa.Model.PaymentModality", "PaymentModality")
+                        .WithMany()
+                        .HasForeignKey("PaymentModalityId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Akasa.Model.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Akasa.Model.UserPaymentDetail", b =>
+                {
+                    b.HasOne("Akasa.Model.UserPayment", "UserPayment")
+                        .WithMany()
+                        .HasForeignKey("UserPaymentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Akasa.Model.UserXRole", b =>
                 {
                     b.HasOne("Akasa.Model.User", "User")
-                        .WithMany("LstUserRole")
+                        .WithMany("LstUserXRole")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
