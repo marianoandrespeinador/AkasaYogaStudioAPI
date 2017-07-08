@@ -8,7 +8,7 @@ using Akasa.Data;
 namespace AkasaYogaStudioAPI.Migrations
 {
     [DbContext(typeof(AkasaDBContext))]
-    [Migration("20170708213714_InitialMigration")]
+    [Migration("20170708223832_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -177,6 +177,8 @@ namespace AkasaYogaStudioAPI.Migrations
 
                     b.Property<string>("Email");
 
+                    b.Property<string>("EmergencyPhone");
+
                     b.Property<DateTime?>("EndDate");
 
                     b.Property<string>("FacebookID");
@@ -187,6 +189,8 @@ namespace AkasaYogaStudioAPI.Migrations
                     b.Property<string>("Password");
 
                     b.Property<string>("PasswordSalt");
+
+                    b.Property<string>("Phone");
 
                     b.Property<DateTime>("StartDate");
 

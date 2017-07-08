@@ -49,11 +49,13 @@ namespace AkasaYogaStudioAPI.Migrations
                         .Annotation("MySql:ValueGeneratedOnAdd", true),
                     Description = table.Column<string>(maxLength: 500, nullable: true),
                     Email = table.Column<string>(nullable: true),
+                    EmergencyPhone = table.Column<string>(nullable: true),
                     EndDate = table.Column<DateTime>(nullable: true),
                     FacebookID = table.Column<string>(nullable: true),
                     Name = table.Column<string>(maxLength: 100, nullable: true),
                     Password = table.Column<string>(nullable: true),
                     PasswordSalt = table.Column<string>(nullable: true),
+                    Phone = table.Column<string>(nullable: true),
                     StartDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

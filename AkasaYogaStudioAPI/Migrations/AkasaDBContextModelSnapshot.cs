@@ -176,6 +176,8 @@ namespace AkasaYogaStudioAPI.Migrations
 
                     b.Property<string>("Email");
 
+                    b.Property<string>("EmergencyPhone");
+
                     b.Property<DateTime?>("EndDate");
 
                     b.Property<string>("FacebookID");
@@ -186,6 +188,8 @@ namespace AkasaYogaStudioAPI.Migrations
                     b.Property<string>("Password");
 
                     b.Property<string>("PasswordSalt");
+
+                    b.Property<string>("Phone");
 
                     b.Property<DateTime>("StartDate");
 
