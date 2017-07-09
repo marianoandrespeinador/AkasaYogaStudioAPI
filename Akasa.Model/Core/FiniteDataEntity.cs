@@ -12,7 +12,7 @@ namespace Akasa.Model.Core
 
         public DateTime StartDate
         {
-            get => _dateCreated ?? DateTime.Now;
+            get => _dateCreated == null ? DateTime.Now : _dateCreated.Value.Year < 2017 ? DateTime.Now : _dateCreated.Value;
             set => _dateCreated = value;
         }
 
