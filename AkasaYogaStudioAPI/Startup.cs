@@ -1,6 +1,8 @@
 ﻿using System.IO;
 using Akasa.Data;
+using AkasaYogaStudioAPI.Middleware;
 using AkasaYogaStudioAPI.MigrationsInitContext;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -48,7 +50,13 @@ namespace AkasaYogaStudioAPI
             services.AddDbContext<AkasaDBContext>(x => x.UseMySql(connString,
                 o => o.MigrationsAssembly("AkasaYogaStudioAPI")));
 
-            services.AddMvc();
+            services.AddMvc(options =>
+                {
+                    options.Filters.Add(new ValidateModelAttribute());
+                })
+                .AddFluentValidation(fvc =>
+                    fvc.RegisterValidatorsFromAssemblyContaining<Startup>()); 
+
             services.AddMemoryCache();
 
             services.AddAkasaMappingService();
@@ -72,7 +80,7 @@ namespace AkasaYogaStudioAPI
 
             app.UseStaticFiles();
 
-            app.UseMvc();
+            app.UseMvc(); 
 
             app.UseSwagger(c =>
             {
