@@ -7,10 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace AkasaYogaStudioAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class LessonController : AkasaController<ILessonService, LessonGetDto, LessonInsertDto, LessonUpdateDto>
+    public class LessonDayController : AkasaController<ILessonDayService, LessonDayGetDto, LessonDayInsertDto, LessonDayUpdateDto>
     {
-        public LessonController(ILessonService lessonService) 
-            : base(lessonService)
+        public LessonDayController(ILessonDayService LessonDayService) 
+            : base(LessonDayService)
         {
         }
     }

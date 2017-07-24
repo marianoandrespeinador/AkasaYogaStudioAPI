@@ -1,6 +1,5 @@
 ﻿using Akasa.Dto;
 using Akasa.Services.Contracts;
-using Akasa.Services.Implementations;
 using AkasaYogaStudioAPI.Core;
 using Microsoft.AspNetCore.Mvc;
 
