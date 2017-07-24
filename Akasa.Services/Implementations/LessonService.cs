@@ -1,9 +1,14 @@
-﻿using Akasa.Data;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Akasa.Data;
 using Akasa.Dto;
 using Akasa.Model;
 using Akasa.Services.Contracts;
 using Akasa.Services.Core;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace Akasa.Services.Implementations
 {
@@ -15,16 +20,18 @@ namespace Akasa.Services.Implementations
             : base(context, mapper)
         {
         }
+        
+        public override async Task<List<LessonGetDto>> Get()
+        {
+            var rawList = await _thisDbSet
+                .AsNoTracking()
+                .WhereIsValid()
+                .Include(l => l.LstLessonDay)
+                .Include(l => l.LstLessonRecurrent)
+                .ToListAsync();
 
-        //public override async Task<LessonGetDto> Get(int id)
-        //{
-        //    var lesson = await _thisDbSet
-        //        .Where(e => e.Id == id)
-        //        .Include(e => e.LstLessonCost)
-        //        .FirstAsync();
-
-        //    return _mapperService.Map<LessonGetDto>(lesson);
-        //}
+            return _mapperService.Map<List<LessonGetDto>>(rawList);
+        }
 
     }
 }

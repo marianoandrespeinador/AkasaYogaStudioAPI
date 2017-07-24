@@ -38,9 +38,11 @@ namespace Akasa.Services.Core
 
         public virtual async Task<List<TGetDto>> Get()
         {
+            var rightNow = DateTime.Now;
+
             var rawList = await _thisDbSet
                 .AsNoTracking()
-                .Where(e => e.EndDate == null)
+                .Where(e => (e.EndDate == null) || (e.EndDate > rightNow))
                 .ToListAsync();
 
             return _mapperService.Map<List<TGetDto>>(rawList);
