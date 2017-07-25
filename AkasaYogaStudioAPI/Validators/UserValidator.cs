@@ -1,5 +1,4 @@
-﻿
-using Akasa.Dto;
+﻿using Akasa.Dto.POCOs;
 using FluentValidation;
 
 namespace AkasaYogaStudioAPI.Validators

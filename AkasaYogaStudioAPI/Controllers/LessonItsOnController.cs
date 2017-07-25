@@ -1,5 +1,4 @@
-﻿using System.Threading.Tasks;
-using Akasa.Dto;
+﻿using Akasa.Dto.POCOs;
 using Akasa.Services.Contracts;
 using AkasaYogaStudioAPI.Core;
 using Microsoft.AspNetCore.Mvc;

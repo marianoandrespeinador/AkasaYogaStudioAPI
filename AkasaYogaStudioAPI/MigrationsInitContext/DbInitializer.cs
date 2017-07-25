@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Akasa.Data;
 using Akasa.Model;
-using Akasa.Model.VirtualKeys;
 
 namespace AkasaYogaStudioAPI.MigrationsInitContext
 {

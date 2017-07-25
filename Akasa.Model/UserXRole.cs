@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using Akasa.Model.Core;
 
 namespace Akasa.Model
 {

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Akasa.Data;
-using Akasa.Dto;
+using Akasa.Dto.POCOs;
 using Akasa.Model;
 using Akasa.Services.Contracts;
 using Akasa.Services.Core;

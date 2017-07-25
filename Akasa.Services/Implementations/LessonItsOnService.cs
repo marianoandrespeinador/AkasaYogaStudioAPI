@@ -1,5 +1,5 @@
 ﻿using Akasa.Data;
-using Akasa.Dto;
+using Akasa.Dto.POCOs;
 using Akasa.Model;
 using Akasa.Services.Contracts;
 using Akasa.Services.Core;
