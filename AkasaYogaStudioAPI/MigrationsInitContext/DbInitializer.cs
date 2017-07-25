@@ -18,6 +18,7 @@ namespace AkasaYogaStudioAPI.MigrationsInitContext
                 context.User.Add(new User
                 {
                     Name = "Nano",
+                    Phone = "88226649",
                     FacebookID = String.Empty,
                     Email = "nanopp@gmail.com",
                     LstUserXRole = new List<UserXRole>() { new UserXRole
@@ -54,26 +55,28 @@ namespace AkasaYogaStudioAPI.MigrationsInitContext
                     {
                         Cost = 6000,
                         LessonQuantityAvailable = 1,
-                        LessonAvailabilityPeriod = new TimeSpan(1, 0, 0, 0)
+                        LessonAvailabilityDays = 1
                     },
                     new PaymentModality
                     {
                         Cost = 16000,
                         LessonQuantityAvailable = 4,
-                        LessonAvailabilityPeriod = new TimeSpan(30, 0, 0, 0)
+                        LessonAvailabilityDays = 30
                     },
                     new PaymentModality
                     {
                         Cost = 28000,
                         LessonQuantityAvailable = 8,
-                        LessonAvailabilityPeriod = new TimeSpan(60, 0, 0, 0)
+                        LessonAvailabilityDays = 60
                     },
                     new PaymentModality
                     {
                         Cost = 48000,
                         LessonQuantityAvailable = 16,
-                        LessonAvailabilityPeriod = new TimeSpan(90, 0, 0, 0)
+                        LessonAvailabilityDays = 90
                     });
+
+                context.SaveChanges();
             }
         }
 

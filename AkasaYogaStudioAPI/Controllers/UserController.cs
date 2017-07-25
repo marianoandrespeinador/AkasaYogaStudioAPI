@@ -8,8 +8,8 @@ namespace AkasaYogaStudioAPI.Controllers
     [Route("api/[controller]")]
     public class UserController : AkasaController<IUserService, UserGetDto, UserInsertDto, UserUpdateDto>
     {
-        public UserController(IUserService UserService) 
-            : base(UserService)
+        public UserController(IUserService userService) 
+            : base(userService)
         {
         }
     }
