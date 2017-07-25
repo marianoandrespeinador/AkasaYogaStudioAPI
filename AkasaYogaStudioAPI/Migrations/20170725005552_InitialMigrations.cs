@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AkasaYogaStudioAPI.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialMigrations : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -31,7 +32,7 @@ namespace AkasaYogaStudioAPI.Migrations
                         .Annotation("MySql:ValueGeneratedOnAdd", true),
                     Cost = table.Column<decimal>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: true),
-                    LessonAvailabilityPeriod = table.Column<TimeSpan>(nullable: false),
+                    LessonAvailabilityDays = table.Column<int>(nullable: false),
                     LessonQuantityAvailable = table.Column<int>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false)
                 },

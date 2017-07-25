@@ -8,8 +8,8 @@ using Akasa.Data;
 namespace AkasaYogaStudioAPI.Migrations
 {
     [DbContext(typeof(AkasaDBContext))]
-    [Migration("20170708223832_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20170725005552_InitialMigrations")]
+    partial class InitialMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -156,7 +156,7 @@ namespace AkasaYogaStudioAPI.Migrations
 
                     b.Property<DateTime?>("EndDate");
 
-                    b.Property<TimeSpan>("LessonAvailabilityPeriod");
+                    b.Property<int>("LessonAvailabilityDays");
 
                     b.Property<int>("LessonQuantityAvailable");
 

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Akasa.Data;
 
 namespace AkasaYogaStudioAPI.Migrations
@@ -154,7 +155,7 @@ namespace AkasaYogaStudioAPI.Migrations
 
                     b.Property<DateTime?>("EndDate");
 
-                    b.Property<TimeSpan>("LessonAvailabilityPeriod");
+                    b.Property<int>("LessonAvailabilityDays");
 
                     b.Property<int>("LessonQuantityAvailable");
 
