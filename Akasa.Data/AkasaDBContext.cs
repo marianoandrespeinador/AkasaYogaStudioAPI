@@ -18,7 +18,6 @@ namespace Akasa.Data
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<UserInjury> UserInjury { get; set; }
         public virtual DbSet<UserPayment> UserPayment { get; set; }
-        public virtual DbSet<UserPaymentDetail> UserPaymentDetail { get; set; }
         public virtual DbSet<UserXRole> UserRole { get; set; }
 
         public AkasaDBContext(DbContextOptions options) : base(options)

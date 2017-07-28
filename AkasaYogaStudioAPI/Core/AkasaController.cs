@@ -54,5 +54,15 @@ namespace AkasaYogaStudioAPI.Core
             await _service.Delete(id);
         }
 
+        /// <summary>
+        /// Get the list for a dropdown
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("format=simpleList")]
+        public async Task<IEnumerable<KeyValuePair<int, string>>> GetSimpleList()
+        {
+            return await _service.GetDropDown();
+        }
+
     }
 }

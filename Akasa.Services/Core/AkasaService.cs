@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Akasa.Services.Core
 {
-    public class AkasaService<TDataEntity, TGetDto, TInsertDto,TUpdateDto> : IAkasaService<TGetDto, TInsertDto, TUpdateDto>
+    public abstract class AkasaService<TDataEntity, TGetDto, TInsertDto,TUpdateDto> : IAkasaService<TGetDto, TInsertDto, TUpdateDto>
         where TDataEntity : FiniteDataEntity
         where TGetDto : FiniteDataEntityDto
         where TInsertDto : FiniteDataEntityDto
@@ -38,11 +38,9 @@ namespace Akasa.Services.Core
 
         public virtual async Task<List<TGetDto>> Get()
         {
-            var rightNow = DateTime.Now;
-
             var rawList = await _thisDbSet
                 .AsNoTracking()
-                .Where(e => (e.EndDate == null) || (e.EndDate > rightNow))
+                .WhereIsValid()
                 .ToListAsync();
 
             return _mapperService.Map<List<TGetDto>>(rawList);
@@ -170,6 +168,30 @@ namespace Akasa.Services.Core
             await _context.SaveChangesAsync();
 
             return await Get(newBank.Id);
+        }
+
+        protected virtual KeyValuePair<int, string> GetAsKeyValue(TDataEntity record)
+        {
+            if (!(record is FiniteDataEntityCatalog))
+            {
+                throw new NotImplementedException();
+            }
+            
+            var recCatalog = record as FiniteDataEntityCatalog;
+            return new KeyValuePair<int, string>(recCatalog.Id, recCatalog.Name);
+        }
+
+        public virtual async Task<List<KeyValuePair<int, string>>> GetDropDown()
+        {
+            var rightNow = DateTime.Now;
+
+            var rawList = await _thisDbSet
+                .AsNoTracking()
+                .WhereIsValid()
+                .Select(p => GetAsKeyValue(p))
+                .ToListAsync();
+
+            return rawList;
         }
     }
 }

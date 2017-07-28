@@ -11,8 +11,7 @@ namespace Akasa.Model
         [ForeignKey(nameof(PaymentModality))]
         public int PaymentModalityId { get; set; }
 
-        public decimal TotalAmountPayed { get; set; }
-        public decimal TotalAmountToPay { get; set; }
+        public decimal AmountOfCostPayed { get; set; }
 
         public virtual User User { get; set; }
         public virtual PaymentModality PaymentModality { get; set; }

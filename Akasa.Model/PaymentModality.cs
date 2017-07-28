@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Akasa.Model.Core;
 
 namespace Akasa.Model
@@ -11,5 +12,7 @@ namespace Akasa.Model
         public int LessonAvailabilityDays { get; set; }
 
         public decimal Cost { get; set; }
+
+        public virtual List<UserPayment> LstUserPayment { get; set; } = new List<UserPayment>();
     }
 }
