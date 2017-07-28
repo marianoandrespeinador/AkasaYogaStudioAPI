@@ -1,3 +1,4 @@
+using System;
 using Akasa.Dto.Core;
 
 namespace Akasa.Dto.POCOs
@@ -6,6 +7,6 @@ namespace Akasa.Dto.POCOs
       {
             public virtual int? LessonRecurrentId { get; set; }
             public virtual int? LessonDayId { get; set; }
-            public virtual System.DateTime DateItsOn { get; set; }
+            public virtual DateTime DateItsOn { get; set; }
       }
 }

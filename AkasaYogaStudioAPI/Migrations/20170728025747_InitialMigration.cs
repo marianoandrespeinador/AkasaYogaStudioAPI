@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AkasaYogaStudioAPI.Migrations
 {
-    public partial class InitialMigrations : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -141,11 +141,10 @@ namespace AkasaYogaStudioAPI.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGeneratedOnAdd", true),
+                    AmountOfCostPayed = table.Column<decimal>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: true),
                     PaymentModalityId = table.Column<int>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
-                    TotalAmountPayed = table.Column<decimal>(nullable: false),
-                    TotalAmountToPay = table.Column<decimal>(nullable: false),
                     UserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -236,37 +235,21 @@ namespace AkasaYogaStudioAPI.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserPaymentDetail",
+                name: "LessonItsOnXUser",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGeneratedOnAdd", true),
-                    AmountPayed = table.Column<decimal>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: true),
+                    IsPresent = table.Column<bool>(nullable: false),
+                    LessonItsOnId = table.Column<int>(nullable: false),
                     StartDate = table.Column<DateTime>(nullable: false),
-                    UserPaymentId = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserPaymentDetail", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_UserPaymentDetail_UserPayment_UserPaymentId",
-                        column: x => x.UserPaymentId,
-                        principalTable: "UserPayment",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "LessonItsOnXUser",
-                columns: table => new
-                {
                     UserId = table.Column<int>(nullable: false),
-                    LessonItsOnId = table.Column<int>(nullable: false)
+                    UserPaymentId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_LessonItsOnXUser", x => new { x.UserId, x.LessonItsOnId });
+                    table.PrimaryKey("PK_LessonItsOnXUser", x => x.Id);
                     table.ForeignKey(
                         name: "FK_LessonItsOnXUser_LessonItsOn_LessonItsOnId",
                         column: x => x.LessonItsOnId,
@@ -279,6 +262,12 @@ namespace AkasaYogaStudioAPI.Migrations
                         principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_LessonItsOnXUser_UserPayment_UserPaymentId",
+                        column: x => x.UserPaymentId,
+                        principalTable: "UserPayment",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -300,6 +289,16 @@ namespace AkasaYogaStudioAPI.Migrations
                 name: "IX_LessonItsOnXUser_LessonItsOnId",
                 table: "LessonItsOnXUser",
                 column: "LessonItsOnId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LessonItsOnXUser_UserId",
+                table: "LessonItsOnXUser",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LessonItsOnXUser_UserPaymentId",
+                table: "LessonItsOnXUser",
+                column: "UserPaymentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LessonRecurrent_LessonId",
@@ -325,11 +324,6 @@ namespace AkasaYogaStudioAPI.Migrations
                 name: "IX_UserPayment_UserId",
                 table: "UserPayment",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserPaymentDetail_UserPaymentId",
-                table: "UserPaymentDetail",
-                column: "UserPaymentId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -342,9 +336,6 @@ namespace AkasaYogaStudioAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserInjury");
-
-            migrationBuilder.DropTable(
-                name: "UserPaymentDetail");
 
             migrationBuilder.DropTable(
                 name: "UserXRole");

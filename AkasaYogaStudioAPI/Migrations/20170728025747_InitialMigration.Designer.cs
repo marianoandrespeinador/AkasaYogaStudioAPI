@@ -8,8 +8,8 @@ using Akasa.Data;
 namespace AkasaYogaStudioAPI.Migrations
 {
     [DbContext(typeof(AkasaDBContext))]
-    [Migration("20170725005552_InitialMigrations")]
-    partial class InitialMigrations
+    [Migration("20170728025747_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -82,13 +82,28 @@ namespace AkasaYogaStudioAPI.Migrations
 
             modelBuilder.Entity("Akasa.Model.LessonItsOnXUser", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("EndDate");
+
+                    b.Property<bool>("IsPresent");
 
                     b.Property<int>("LessonItsOnId");
 
-                    b.HasKey("UserId", "LessonItsOnId");
+                    b.Property<DateTime>("StartDate");
+
+                    b.Property<int>("UserId");
+
+                    b.Property<int?>("UserPaymentId");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("LessonItsOnId");
+
+                    b.HasIndex("UserId");
+
+                    b.HasIndex("UserPaymentId");
 
                     b.ToTable("LessonItsOnXUser");
                 });
@@ -224,15 +239,13 @@ namespace AkasaYogaStudioAPI.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<decimal>("AmountOfCostPayed");
+
                     b.Property<DateTime?>("EndDate");
 
                     b.Property<int>("PaymentModalityId");
 
                     b.Property<DateTime>("StartDate");
-
-                    b.Property<decimal>("TotalAmountPayed");
-
-                    b.Property<decimal>("TotalAmountToPay");
 
                     b.Property<int>("UserId");
 
@@ -243,26 +256,6 @@ namespace AkasaYogaStudioAPI.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserPayment");
-                });
-
-            modelBuilder.Entity("Akasa.Model.UserPaymentDetail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<decimal>("AmountPayed");
-
-                    b.Property<DateTime?>("EndDate");
-
-                    b.Property<DateTime>("StartDate");
-
-                    b.Property<int>("UserPaymentId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserPaymentId");
-
-                    b.ToTable("UserPaymentDetail");
                 });
 
             modelBuilder.Entity("Akasa.Model.UserXRole", b =>
@@ -306,6 +299,10 @@ namespace AkasaYogaStudioAPI.Migrations
                         .WithMany("LstLessonItsOnXUser")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Akasa.Model.UserPayment", "UserPayment")
+                        .WithMany()
+                        .HasForeignKey("UserPaymentId");
                 });
 
             modelBuilder.Entity("Akasa.Model.LessonRecurrent", b =>
@@ -335,21 +332,13 @@ namespace AkasaYogaStudioAPI.Migrations
             modelBuilder.Entity("Akasa.Model.UserPayment", b =>
                 {
                     b.HasOne("Akasa.Model.PaymentModality", "PaymentModality")
-                        .WithMany()
+                        .WithMany("LstUserPayment")
                         .HasForeignKey("PaymentModalityId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Akasa.Model.User", "User")
-                        .WithMany()
+                        .WithMany("LstUserPayment")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Akasa.Model.UserPaymentDetail", b =>
-                {
-                    b.HasOne("Akasa.Model.UserPayment", "UserPayment")
-                        .WithMany()
-                        .HasForeignKey("UserPaymentId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

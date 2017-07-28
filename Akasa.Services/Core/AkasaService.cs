@@ -181,7 +181,7 @@ namespace Akasa.Services.Core
             return new KeyValuePair<int, string>(recCatalog.Id, recCatalog.Name);
         }
 
-        public virtual async Task<List<KeyValuePair<int, string>>> GetDropDown()
+        public virtual async Task<IEnumerable<KeyValuePair<int, string>>> GetDropDown()
         {
             var rightNow = DateTime.Now;
 

@@ -8,6 +8,6 @@ namespace Akasa.Services.Contracts
 {
     public interface IPaymentModalityService : IAkasaService<PaymentModalityGetDto, PaymentModalityInsertDto, PaymentModalityUpdateDto>
     {
-        Task<List<KeyValuePair<int, string>>> GetDropDown();
+        Task<IEnumerable<KeyValuePair<int, string>>> GetDropDown();
     }
 }

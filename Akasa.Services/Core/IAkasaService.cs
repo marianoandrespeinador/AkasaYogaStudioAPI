@@ -14,6 +14,6 @@ namespace Akasa.Services.Core
         Task<TGetDto> Insert(TInsertDto toInsert);
         Task Update(int id, TUpdateDto dtoUpdate);
         Task Delete(int id);
-        Task<List<KeyValuePair<int, string>>> GetDropDown();
+        Task<IEnumerable<KeyValuePair<int, string>>> GetDropDown();
     }
 }
