@@ -8,6 +8,7 @@ using Akasa.Dto.Core;
 using Akasa.Model.Core;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace Akasa.Services.Core
 {
@@ -31,17 +32,47 @@ namespace Akasa.Services.Core
         }
 
         protected virtual async Task<TDataEntity> GetRaw(int id)
-            => await _thisDbSet.AsNoTracking().FirstOrDefaultAsync(e => e.Id == id);
+            => await _thisDbSet
+                        .AsNoTracking()
+                        .FirstOrDefaultAsync(e => e.Id == id);
 
         protected virtual async Task<TDataEntity> GetRawWithTrack(int id)
-            => await _thisDbSet.FirstOrDefaultAsync(e => e.Id == id);
+            => await _thisDbSet
+                        .FirstOrDefaultAsync(e => e.Id == id);
 
         public virtual async Task<List<TGetDto>> Get()
         {
-            var rawList = await _thisDbSet
-                .AsNoTracking()
-                .WhereIsValid()
-                .ToListAsync();
+            List<TDataEntity> rawList;
+
+            var instance = Activator.CreateInstance<TGetDto>();
+
+            var attributes = instance
+                .GetType()
+                .GetTypeInfo()
+                .GetProperties()
+                .SelectMany(p => p
+                    .GetCustomAttributes()
+                    .Select(ca => new { AttributeTypeName = ca.GetType().Name, PropertyName = p.Name }));
+
+            if (attributes.Any(a=>a.AttributeTypeName.Equals(nameof(ForceIncludeAttribute))))
+            {
+                var query = _thisDbSet
+                            .AsNoTracking()
+                            .WhereIsValid();
+
+                query = attributes
+                    .Aggregate(query
+                    , (currentQuery, includeProperty) => currentQuery.Include(includeProperty.PropertyName));
+
+                rawList = await query.ToListAsync();
+            }
+            else
+            {
+                rawList = await _thisDbSet
+                            .AsNoTracking()
+                            .WhereIsValid()
+                            .ToListAsync();
+            }
 
             return _mapperService.Map<List<TGetDto>>(rawList);
         }

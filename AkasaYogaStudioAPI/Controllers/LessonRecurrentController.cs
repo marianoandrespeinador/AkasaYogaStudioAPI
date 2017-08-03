@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace AkasaYogaStudioAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class LessonController : AkasaController<ILessonService, LessonGetDto, LessonInsertDto, LessonUpdateDto>
+    public class LessonRecurrentController : AkasaController<ILessonRecurrentService, LessonRecurrentGetDto, LessonRecurrentInsertDto, LessonRecurrentUpdateDto>
     {
-        public LessonController(ILessonService lessonService) 
+        public LessonRecurrentController(ILessonRecurrentService lessonService) 
             : base(lessonService)
         {
         }
