@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Akasa.Data;
 using Akasa.Dto.POCOs;
+using Akasa.Dto.Projections;
 using Akasa.Model;
 using Akasa.Services.Contracts;
 using Akasa.Services.Core;
@@ -10,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Akasa.Services.Implementations
 {
-    public class LessonRecurrentService : AkasaService<LessonRecurrent, LessonRecurrentGetDto, LessonRecurrentInsertDto, LessonRecurrentUpdateDto>
+    public class LessonRecurrentService : AkasaService<LessonRecurrent, LessonRecurrentGetPro, LessonRecurrentInsertDto, LessonRecurrentUpdateDto>
         , ILessonRecurrentService
     {
         public LessonRecurrentService(AkasaDBContext context

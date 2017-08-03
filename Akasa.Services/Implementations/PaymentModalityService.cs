@@ -24,10 +24,10 @@ namespace Akasa.Services.Implementations
         protected override KeyValuePair<int, string> GetAsKeyValue(PaymentModality record)
         {
             var period = record.LessonAvailabilityDays % 30 == 0
-                ? $" en {record.LessonAvailabilityDays / 30} meses"
+                ? $" en {Convert.ToInt32(record.LessonAvailabilityDays / 30)} meses"
                 : "";
 
-            return new KeyValuePair<int, string>(record.Id, $"₡{record.Cost} - {record.LessonQuantityAvailable} clases{period}");
+            return new KeyValuePair<int, string>(record.Id, $"₡{Convert.ToInt32(record.Cost)} - {record.LessonQuantityAvailable} clases{period}");
         }
 
     }
