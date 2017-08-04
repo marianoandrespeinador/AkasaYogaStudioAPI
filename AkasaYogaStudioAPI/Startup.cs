@@ -87,7 +87,7 @@ namespace AkasaYogaStudioAPI
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "V1 Docs");
+                c.SwaggerEndpoint(Configuration["Swagger:VirtualDirectory"] + "/swagger/v1/swagger.json", "V1 Docs");
             });
 
             DbInitializer.Initialize(context);
