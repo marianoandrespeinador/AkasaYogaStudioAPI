@@ -21,7 +21,7 @@ namespace AkasaYogaStudioAPI
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile($"appsettings.local.overrides.json", optional: true)
                 .AddEnvironmentVariables();
 
             Configuration = builder.Build();
@@ -85,9 +85,11 @@ namespace AkasaYogaStudioAPI
                 c.PreSerializeFilters.Add((swagger, httpReq) => swagger.Host = httpReq.Host.Value);
             });
 
+            var jsonFileUrlWithVirtualDirectory = Configuration["Swagger:VirtualDirectory"] + "/swagger/v1/swagger.json";
+            
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint(Configuration["Swagger:VirtualDirectory"] + "/swagger/v1/swagger.json", "V1 Docs");
+                c.SwaggerEndpoint(jsonFileUrlWithVirtualDirectory, "V1 Docs");
             });
 
             DbInitializer.Initialize(context);
